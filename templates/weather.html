@@ -1,0 +1,240 @@
+<!-- SVG ICONS ARE FROM FLATICON, YOU CAN FIND THEM HERE : https://www.flaticon.com/packs/cute-weather-1?word=weather%20forecast -->
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name = "viewport" content = "width = device-width, initial-scale=1">
+		<title>Weather App</title>
+		<link rel="stylesheet" href="styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+	</head>
+
+  <style>
+    *{
+      box-sizing: border-box;
+      margin:0;
+      padding: 0;
+    }
+    
+    html{
+      font-size: 62.5%;
+    }
+    
+    body{
+      width: 100%;
+      height: 100vh;
+      background-image: -webkit-linear-gradient(bottom, #1B5A7A 0%, #011C29 100%);
+      background-image: -moz-linear-gradient(bottom, #1B5A7A 0%, #011C29 100%);
+      background-image: linear-gradient(to top, #1B5A7A 0%, #011C29 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'MuseoModerno', cursive;	
+    }
+    
+    body::before,::after{
+      height: 100%;
+      content: "";
+      position: absolute;
+      color: #fff;
+      -webkit-background-size: 180px 170px;
+      -moz-background-size: 180px 170px;
+      background-size: 180px 170px;
+      z-index: -1;
+    }
+    
+    body::before{
+      width: 100%;
+      -webkit-background-image: radial-gradient(#fff 0%, transparent 0.8%);
+      -moz-background-image: radial-gradient(#fff 0%, transparent 0.8%);
+      background-image: radial-gradient(#fff 0%, transparent 0.8%);
+    }
+    
+    body::after{
+      width: 100%;
+      -webkit-background-image: radial-gradient(#fff 0.2%, transparent 0.9%);
+      -moz-background-image: radial-gradient(#fff 0.2%, transparent 0.9%);
+      background-image: radial-gradient(#fff 0.2%, transparent 0.9%);
+      background-position: 55%;
+    }
+    
+    main{
+      width: 320px;
+      height: 568px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 15px;
+      box-shadow: 0 0 5px 5px rgba(164,207,212,0.55);
+      background-image: -webkit-linear-gradient(bottom, #fff1eb 0%, #ace0f9 100%);
+      background-image: -o-linear-gradient(bottom, #fff1eb 0%, #ace0f9 100%);
+      background-image: linear-gradient(to top, #EFE7E4 0%, #ace0f9 100%);
+    }
+    
+    h1{
+      margin: 30px auto 25px auto;
+      color: #fff;
+      font-size: 3.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .location {
+      display: flex;
+      color: #fff;
+      font-size: 2.3rem;
+    }
+    
+    .location p{
+      margin: -3px 0 0 10px;
+    }
+    
+    .weather-container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: rgba(110,168,195,1.00);
+    }
+    
+    .weather-icon img{
+      height: 175px;
+      margin: 40px 0 30px 0;
+    }
+    
+    .temperature-value{
+      margin-bottom: 5px;
+      font-size: 3.3rem;
+      cursor: pointer;
+    }
+    
+    .temperature-description{
+      font-size: 2rem;
+      text-transform: capitalize;
+    }
+  </style>
+
+
+	<body>
+		<main>
+			<h1>Local Weather</h1>
+			<div class="location">
+				<i class="fas fa-map-marker-alt" aria-hidden="true"></i> <p> - </p>
+			</div>
+			<div class="notification"></div>
+			<div class="weather-container">
+				<div class="weather-icon">
+					<img src="https://margaux-dev.github.io/weather-app/icons-weather/unknown.svg" alt="Rainbow">
+				</div>
+				<div class="temperature-value">
+					<p> - °<span>C</span></p>
+				</div>
+				<div class="temperature-description">
+					<p> - </p>
+				</div>
+				
+			</div>
+		</main>
+		<script src="script.js"></script>
+	</body>
+
+  <script>
+    const notificationElement = document.querySelector(".notification");
+const iconElement = document.querySelector(".weather-icon");
+const tempElement = document.querySelector(".temperature-value p");
+const descElement = document.querySelector(".temperature-description p");
+const locationElement = document.querySelector(".location p");
+
+const weather = {};
+weather.temperature = {
+	unit: "celsius"
+}
+
+const K = 273;	
+
+
+// ASK FOR GEOLOCATION
+if ("geolocation" in navigator){
+	navigator.geolocation.getCurrentPosition(setPosition, showError);
+} else {
+	notificationElement.style.display = "block";
+	notificationElement.innerHTML = "<p>Browser doesn't support geolocation.</p>"
+}
+
+// SET POSITION
+function setPosition (position) {
+	let latitude = position.coords.latitude;
+	let longitude = position.coords.longitude;
+	getWeather(latitude, longitude);
+}
+
+// SHOW ERROR
+function showError (error) {
+	notificationElement.style.display = "block";
+	notificationElement.innerHTML = `<p>${error.message}</p>`;
+}
+
+
+// GET WEATHER FROM API
+function getWeather(latitude, longitude) {
+	const api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=5d02e70991a1daa5f8144ab196d1e9ac`;
+	fetch(api)
+		.then(function(response){
+			let data = response.json();
+			return data;
+		})
+		.then(function (data) {
+			weather.temperature.value = Math.floor(data.main.temp - K);
+			weather.description = data.weather[0].description;
+			weather.iconId = data.weather[0].icon;
+			weather.city = data.name;
+			weather.country = data.sys.country;
+		})
+		.then(function () {
+		displayWeather();
+		});
+}
+
+
+// DISPLAY WEATHER
+function displayWeather () {
+	iconElement.innerHTML = `<img src="https://margaux-dev.github.io/weather-app/icons-weather/${weather.iconId}.svg" alt="${weather.description}"/>`;
+	tempElement.innerHTML = `${weather.temperature.value} ° <span>C</span>`;
+	descElement.innerHTML = weather.description;
+	locationElement.innerHTML = `${weather.city}, ${weather.country}`;
+}
+
+
+//CONVERT C TO F
+function celsiusToF(temperature) {
+	return temperature * 9/5 +32;
+}
+
+
+// CONVERT C TO F ON CLICK
+tempElement.addEventListener("click", () => {
+	if (weather.temperature.unit === undefined) return;
+	if (weather.temperature.unit === "celsius"){
+		let fahrenheit = celsiusToF(weather.temperature.value);
+		fahrenheit = Math.floor(fahrenheit);
+		tempElement.innerHTML = `${fahrenheit}° <span>F</span>`;
+		weather.temperature.unit = "fahrenheit";
+	} else {
+		tempElement.innerHTML = `${weather.temperature.value}° <span>C</span>`;
+		weather.temperature.unit = "celsius";
+	}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quick Quiz</title>
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="game.css" />
+    <link rel="stylesheet" href="end.css" />
+  </head>
+  <style>
+    :root {
+        background-color: #ecf5ff;
+        font-size: 62.5%;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #333;
+      }
+    
+      *:focus {
+        outline:0;
+      }
+    
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      h1 {
+        font-size: 5.4rem;
+        color: #ff99dd;
+        margin-bottom: 3rem;
+      }
+      
+      h1 > span {
+        font-size: 2.4rem;
+        font-weight: 500;
+      }
+      
+      h2 {
+        font-size: 4.2rem;
+        margin-bottom: 4rem;
+        font-weight: 700;
+      }
+      
+      h3 {
+        font-size: 2.8rem;
+        font-weight: 500;
+      }
+      
+     
+      
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 280px;
+        max-width: 60%;
+        margin: 0 auto;
+      }
+      
+      .container > * {
+        width: 100%;
+      }
+      
+      .flex-column {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .flex-center {
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .justify-center {
+        justify-content: center;
+      }
+      
+      .text-center {
+        text-align: center;
+      }
+      
+      .hidden {
+        display: none;
+      }
+    
+      .explanation {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+        text-align: center;
+        line-height: 1.8rem;
+      }
+      
+      .firstcontainer {
+        margin-top: 3rem;
+      }
+    
+    
+      .btn {
+        font-size: 1.8rem;
+        padding: 1rem 0;
+        width: 20rem;
+        text-align: center;
+        border: 0.1rem solid #ff99dd;
+        margin-bottom: 1rem;
+        text-decoration: none;
+        color: #ff99dd;
+        background-color: white;
+      }
+      
+      .btn:hover {
+        cursor: pointer;
+        box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 153, 221, 0.5);
+        transform: translateY(-0.1rem);
+        transition: transform 150ms;
+      }
+      
+      .btn[disabled]:hover {
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+      }
+      
+      select {
+        appearance: none;
+        text-align-last:center;
+        text-align: center;
+        border: none;
+      }
+    option {
+      appearance: none;
+      -webkit-appearance: none;
+      font-size: 16px;
+      color: #ff99dd;
+      padding: 3px;
+    }
+    
+      @media only screen and (max-width: 360px) {
+        h1 {
+            font-size: 4rem;
+            white-space: nowrap;
+          }
+      }
+      @media only screen and (max-width: 900px) {
+        .container {
+          max-width: 80%;
+        }
+      }
+    .choice-container {
+      display: flex;
+      margin-bottom: 0.5rem;
+      width: 100%;
+      font-size: 1.8rem;
+      border-radius: 5px;
+      border: 0.1rem solid rgb(255, 153, 221, 0.25);
+      background-color: white;
+    }
+    
+    .choice-container:hover {
+      cursor: pointer;
+      box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 153, 221, 0.5);
+      transform: translateY(-0.1rem);
+      transition: transform 150ms;
+    }
+    
+    .choice-text {
+      font-size: 1.6rem;
+      text-align: center;
+      padding: 1.5rem;
+      width: 100%;
+    }
+    
+    .correct {
+      background-color: #28a745;
+    }
+    
+    .incorrect {
+      background-color: #dc3545;
+    }
+    
+    #question {
+      font-size: 1.6rem;
+      text-align: center;
+    }
+    
+    
+    
+    #hud {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .hud-prefix {
+      text-align: center;
+      font-size: 2rem;
+    }
+    
+    .hud-main-text {
+      text-align: center;
+    }
+    
+    #progressBar {
+      width: 20rem;
+      height: 4rem;
+      border: 0.3rem solid #ff99dd;
+      margin-top: 1.5rem;
+    }
+    
+    #progressBarFull {
+      height: 3.4rem;
+      background-color: #ff99dd;
+      width: 0%;
+      max-width: 100%;
+    }
+    
+    
+    
+    #loader {
+      border: 1.6rem solid white;
+      border-radius: 50%;
+      border-top: 1.6rem solid #ff99dd;
+      width: 12rem;
+      height: 12rem;
+      animation: spin 2s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    @media only screen and (max-width: 365px) {
+      :root {
+        font-size: 50%;
+      }
+      .hud-main-text {
+        margin-top: 10px;
+      }
+    }
+    .endText {
+        margin-bottom: 3rem;
+        font-size: 3rem;
+        text-align: center;
+    }
+    
+    .result {
+        width: 50%;
+        max-width:380px;
+        min-width: 20rem;
+        border: 10px solid pink;
+        margin-bottom: 3rem;
+        display: flex;
+        font-size: 3rem;
+    }
+    
+    .result:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+    }
+    
+    .shareButtons {
+        width: 100%;
+        max-width: 20rem;
+        display: flex;
+        margin-bottom: 3rem;
+        justify-content: center;
+    }
+    
+    
+    .twitter-share-button {
+        margin-right: 1rem;
+    }
+    
+    .fb-share-button {
+        margin-left: 1rem;
+    }
+    .endPage {
+        justify-content: flex-start;
+        max-height: 300px;
+    }
+    
+    @media only screen and (max-width: 365px) {
+        .endPage {
+          max-height: 400px;
+          overflow: hidden;
+        }
+    }
+  </style>
+  <body>
+      <body>
+          <div class="firstcontainer" class="flex-center flex-column">
+              <h1>Quick Quiz</h1>
+              <p class="explanation">You will be given random questions based on your level. Select your level and start playing!</p>
+              <div id="home" class="flex-center flex-column">
+                <select class="btn" id="selectoptions" name="cars">
+                    <option value="easy" >Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard" >Hard</option>
+                </select>
+              <a class="btn" id="playButton">Play</a>
+              </div>
+          </div>
+
+          <div class="container hidden" id="playing">
+            <div id="loader" ></div>
+            <div id="game" class="justify-center flex-column hidden">
+              <div id="hud">
+                <div id="hud-item">
+                  <p id="progressText" class="hud-prefix">Question</p>
+                  <div id="progressBar">
+                    <div id="progressBarFull"></div>
+                  </div>
+                </div>
+                <div id="hud-item">
+                  <p class="hud-prefix">Score</p>
+                  <h1 class="hud-main-text" id="score">0</h1>
+                </div>
+              </div>
+              <h2 id="question"></h2>
+              <div class="choice-container">
+                <p class="choice-text" data-number="1"></p>
+              </div>
+              <div class="choice-container">
+                <p class="choice-text" data-number="2"></p>
+              </div>
+              <div class="choice-container">
+                <p class="choice-text" data-number="3"></p>
+              </div>
+              <div class="choice-container">
+                <p class="choice-text" data-number="4"></p>
+              </div>
+            </div>
+          </div>
+          <div class="endPage container flex-center flex-column hidden">
+            <p class="endText">Your result is</p>
+            <div class="result flex-center">0</div>
+            <a class="btn" id="playAgainButton">Play Again</a>
+            <div class="shareButtons flex-center" >
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"  data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Paylaş</a></div>            <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/tr_TR/sdk.js#xfbml=1&version=v3.3"></script>          </div>                  
+            </div>
+          <script src="game.js"></script>
+        </body>
+  </body>
+  <script>
+    let url ='https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple';
+
+const question = document.querySelector("#question");
+const choices = Array.from(document.getElementsByClassName("choice-text"));
+
+const progressBarFull = document.querySelector("#progressBarFull");
+const progressText = document.querySelector("#progressText");
+const scoreText = document.querySelector("#score");
+
+const home = document.querySelector("#home");
+const playing = document.querySelector("#playing");
+const playButton = document.querySelector("#playButton");
+const explanation = document.querySelector('.explanation');
+const selectoptions = document.querySelector("#selectoptions");
+const endPage = document.querySelector('.endPage');
+const result = document.querySelector('.result');
+const playAgainButton = document.querySelector('#playAgainButton');
+
+const point = 10;
+const maxQuestion = 10;
+let score = 0;
+let questionCounter = 0;
+let acceptingAnswers = false;
+let resultvalue = 0;
+
+let allQuestionsArray = [];
+let currentQuestion = {};
+
+
+function urlSelection() {
+    var x = selectoptions.value;
+    if(x === 'easy') {
+        url = 'https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple';
+    }
+    if(x === 'medium') {
+        url = 'https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple';
+    }
+    if(x === 'hard') {
+        url = 'https://opentdb.com/api.php?amount=10&category=9&difficulty=hard&type=multiple';
+    }
+}
+selectoptions.addEventListener('change', urlSelection)
+
+function play() {
+    explanation.innerHTML = 'Good Luck!'
+    game.classList.add("hidden");
+    loader.classList.remove("hidden");
+    playing.classList.remove("hidden");
+    home.classList.add("hidden");
+    fetch(url)
+    .then(response => {
+        return response.json();
+    })
+    .then(response => {
+        allQuestionsArray = response.results.map(q => {
+            let allQuestionsObject = {};
+            allQuestionsObject.question = q.question;
+            allQuestionsObject.answer = Math.floor(Math.random() * 3) + 1;
+            const choices = [...q.incorrect_answers];
+            choices.splice(allQuestionsObject.answer - 1, 0, q['correct_answer']);
+            choices.forEach((eachChoice, index) => {
+                allQuestionsObject["choice" + (index + 1)] = eachChoice;
+            });
+            return allQuestionsObject;
+            });
+        startGame();
+    })
+}
+playButton.addEventListener('click', play)
+
+function startGame() {
+    score = 0;
+    questionCounter = 0;
+    remainedQuestions = [...allQuestionsArray];
+    getQuestion();
+    game.classList.remove("hidden");
+    loader.classList.add("hidden");
+}
+
+function getQuestion() {
+    if (remainedQuestions.length === 0 || questionCounter >= maxQuestion) {
+        endGame();
+        return;
+    }
+    questionCounter++;
+    progressText.innerText = `Question ${questionCounter}/${maxQuestion}`;
+    progressBarFull.style.width = `${(questionCounter / maxQuestion) * 100}%`;
+    const questionIndex = Math.floor(Math.random() * remainedQuestions.length);
+    currentQuestion = remainedQuestions[questionIndex];
+    question.innerText = decoding(currentQuestion.question);
+    choices.forEach(choice => {
+        const number = choice.dataset["number"];
+        choice.innerText = decoding(currentQuestion["choice" + number]);
+    });
+    remainedQuestions.splice(questionIndex, 1);
+    acceptingAnswers = true;
+}
+
+let incrementScore = num => {
+    score += num;
+    scoreText.innerText = score;
+    resultvalue += num;
+    result.innerHTML = `${resultvalue}%`;
+}
+
+function decoding(html) {
+    let el = document.createElement( 'html' );
+    el.innerHTML = html;
+    return el.textContent;
+}
+
+choices.forEach(choice => {
+    choice.addEventListener("click", e => {
+      if (!acceptingAnswers) return;
+  
+      acceptingAnswers = false;
+      const selectedChoice = e.target;
+      const selectedAnswer = selectedChoice.dataset["number"];
+      const classToApply =
+        selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+  
+      if (classToApply === "correct") {
+        incrementScore(point);
+      }
+  
+      selectedChoice.parentElement.classList.add(classToApply);
+
+      setTimeout(() => {
+        selectedChoice.parentElement.classList.remove(classToApply);
+        getQuestion();
+      }, 500);
+    });
+  });
+
+
+function endGame() {
+    endPage.classList.remove("hidden");
+    playing.classList.add("hidden");
+    explanation.innerHTML = "";
+}
+
+
+function playAgain() {
+    home.classList.remove("hidden");
+    endPage.classList.add("hidden");
+    scoreText.innerHTML = 0;
+    resultvalue = 0;
+    result.innerHTML = `0%`;
+    questionCounter = 0;
+    explanation.innerHTML = "You will be given random questions based on your level. Select your level and start playing!";
+}
+
+playAgainButton.addEventListener('click', playAgain);
+
+
+  </script>
+</html>

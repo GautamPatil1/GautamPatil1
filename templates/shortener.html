@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Shortner</title>
+     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        height: 100%;
+        font-family: Arial;
+        margin: 0;
+      }
+
+      form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      form textarea {
+        width: 500px;
+        height: 150px;
+        border-radius: 3px;
+        border-color: red;
+        padding: 2px 10px;
+        box-sizing: border-box;
+        min-width: 300px;
+        margin-top: 29px;
+        font-size: 16px;
+      }
+
+      
+
+      .container {
+        height: 100%;
+      }
+
+      .fa {
+        padding: 8px;
+        font-size: 30px;
+        width: 50px;
+        text-align: center;
+        text-decoration: none;
+        margin: 12px 10px;
+        margin-top: 23px;
+      }
+
+      .fa-twitter {
+        background: #55acee;
+        color: white;
+      }
+
+      .fa-google {
+        background: #dd4b39;
+        color: white;
+      }
+
+      .fa-linkedin {
+        background: #007bb5;
+        color: white;
+      }
+
+      .fa-github {
+        background: black;
+        color: white;
+      }
+
+      .header {
+        height: 124px;
+        margin-top: 0;
+        padding: 36px;
+        text-align: center;
+        background: #197278;
+        color: white;
+        font-size: 25px;
+      }
+      /* Page Content */
+      .content {
+        padding: 20px;
+        background: #edddd4;
+        height: calc(100% - 402px);
+      }
+
+      .footer {
+        background-color: #283d3b;
+        height: 165px;
+        position: fixed;
+        width: 100%;
+        bottom: 0px;
+        text-align: center;
+      }
+
+      .predict {
+        margin-top: 42px;
+        font-size: 25px;
+        text-align: center;
+      }
+
+      .copyright {
+        margin-top: 16px;
+        bottom: 0;
+        color: white;
+        background-color: black;
+        box-sizing: border-box;
+        padding: 31px;
+      }
+
+      .link label{
+        font-size: 20px;
+        box-sizing: border-box;
+      }
+
+      .link input[type="text" i] {
+        max-width: 700px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      
+      .tooltip {
+       position: relative;
+       display: inline-block;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 140px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 90%;
+        left: 50%;
+        margin-left: -75px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .tooltip .tooltiptext::after {
+       content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+
+      .tooltip:hover .tooltiptext {
+       visibility: visible;
+       opacity: 1;
+      }
+
+      .errorlist{
+        display: none;
+      }
+      .gg{
+        margin: 0 625px 0 670px;
+      }
+     .btn{
+        width:100%;
+        background-color: #197278;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;
+     }
+
+     .btn:hover{
+        background-color: transparent;
+        border: 2px solid black;
+        color: #197278;
+        transition: 0.1s ease-in-out;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="container">
+      <div class="header">
+        <h1>Url Shortener</h1>
+      </div>
+      <div class="content">
+        <div class="link">
+          <center>
+            
+          {% block content %}
+          
+          <form method="POST">
+          
+          {% csrf_token %} 
+          {{ form.as_p }} 
+
+          </center>
+          <center>
+            <div class="gg">
+              <button class='btn' type="submit">Submit</button>
+            </div>
+          </center>
+          {% endblock content %}   
+          </form>
+        </div>  
+      </div>
+
+      <div class="footer">
+        <a
+          href="https://twitter.com/#"
+          class="fa fa-twitter"
+          target="_black"
+        ></a>
+        <a
+          href="https://mail.google.com/mail/#"
+          class="fa fa-google"
+          target="_black"
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/#/"
+          class="fa fa-linkedin"
+          target="_black"
+        ></a>
+        <a
+          href="https://github.com/#"
+          class="fa fa-github"
+          target="_black"
+        ></a>
+
+        <div class="copyright">
+          © URL Project
+        </div>
+      </div>
+    </div>
+
+  </form>
+</body>
+
+
+</html>
+

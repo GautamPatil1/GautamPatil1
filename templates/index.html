@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Projects</title>
+</head>
+<style>
+/* Small screens (mobile devices) */
+@media only screen and (max-width: 600px) {
+  .flex li {
+    flex: 1 1 100%;
+  }
+}
+
+/* Medium screens (tablets) */
+@media only screen and (min-width: 601px) and (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+/* Large screens (desktops) */
+@media only screen and (min-width: 993px) {
+  .grid {
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+ .nav a:visited{
+   color:#1ee2e7;
+ }
+
+  .nav{
+    background-color: black;
+    font-size: 20px;
+    color: #1ee2e7;
+    padding:2.5px;
+    margin: 0;
+    border-radius:2.5rem;
+    
+  }
+  a{
+    text-decoration:none; 
+  }
+  li{
+    list-style-type:none; 
+    
+  }
+  ul{
+    list-style-type:none;
+  
+  }
+  .wrapper {
+  margin: 0 auto;
+  width: 90%;
+}
+body: a{
+  text-decoration:none;
+  color: black;
+  
+  
+}
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards li {
+  border: 2px solid #490A3D;
+  border-radius:5px;
+  background-color: #BD1550;
+  color: #fff;
+  flex: 1 1 200px;
+}
+
+.cards h2 {
+  background-color: #490A3D;
+  margin: 0;
+  padding: 10px;
+}
+
+.cards p {
+  padding: 10px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.flex li {
+  flex: 1 1 200px;
+  margin: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  /*grid-template-columns: repeat(auto-fill, minmax(200px 1fr));*/
+  grid-gap: 20px;
+}
+
+</style>
+<body>
+  <nav>
+    <div class='nav'>
+      <ul>
+          <li style="text-align: center;"><a href="{% url 'index' %}">Gautam Patil</a></li>
+
+      </ul>
+    </div>
+  </nav>
+	<div class="wrapper">
+  <h1>Simple Projects</h1>
+  <ul class="flex cards">
+    <a href="{% url 'story' %}">
+      <li><h2>Story Generator</h2>
+      <p>A Random Story Generator. Displays a randomd short story via an public api.
+      </p></li>
+    </a>
+
+    
+    <a href="{% url 'todo' %}">
+      <li><h2>To-Do-App</h2>
+      <p>A To - Do - App. To keep track of all your habits/tasks.
+      </p></li>
+    </a>
+
+    
+    <a href="{% url 'quiz' %}">
+      <li><h2>Quiz App</h2>
+      <p>A Quiz App, built wit trivia API with advanced functionalities.
+      </p></li>
+    </a>
+
+    
+    <a href="{% url 'palette' %}">
+      <li><h2>Color Palette Generator</h2>
+      <p>A Color Palette Generator which generates colors with hue in each other, so that every color complements each other.
+      </p></li>
+    </a>
+  </ul>
+
+</div>
+</body>
+</html>

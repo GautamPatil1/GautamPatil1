@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palette Generator</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,600;1,700&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding:0;
+    margin: 0;
+    font-family: 'popins', sans-serif;
+}
+
+#container-heading{
+    margin-top: 3.5rem;
+    font: 'poppins', sans-serif;
+    font-size: 25px;
+    width: 100%;
+}
+
+#container-colors{
+    /* width: 100%; */
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: center;
+    align-items: center;
+    margin: 3.5rem 5rem 0 5rem;
+    padding: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    
+}
+.color-box{
+    display: none;
+    text-align: center;
+    padding-top: 12rem;
+    border: 1px white;
+    flex: 1;
+    width: 100px;
+    height: 400px;
+    float: left;
+    background-color: red;
+    
+}
+
+
+#btn{
+    margin-top: 2rem;
+}
+
+button{
+    cursor: pointer;
+    background-color: rgb(86, 132, 212);
+    border: 2px solid black;
+    width: 250px;
+    height: 70px;
+    color:white;
+    font-size: 35px;
+    padding: .5rem;
+    border-radius: 25px;
+}
+
+button:hover{
+    background-color: white ;
+    transition: .3s;
+    color: black;
+    border: 2px solid black;
+    width: 250px;
+    height: 70px;
+    font-size: 35px;
+    padding: .5rem;
+    border-radius: 25px;
+}
+small{
+    font-family: 'poppins', sans-serif;
+    color: grey;
+    font-size: 15px;
+}
+h3{
+    margin: 2rem 20rem;
+}
+
+
+
+
+@media (max-width: 768px) {
+    #container-colors {
+      flex-direction: column;
+      margin: 3.5rem 1.5rem;
+    }
+    .color-box {
+      width: 100%;
+      height: 200px;
+      padding-top: 3rem;
+    }
+  }
+  
+</style>
+<body>
+    <div class="container" id="container">
+        <center>
+            <div id="container-heading">
+                <h1>Color Palette Generator</h1>
+                <p>Create a Color Palette Online</p>
+                <div id="btn">
+                    <button id ="button">Generate</button>
+                </div>
+                <small>
+                    Click on the color to copy the hex code.
+                </small>
+            </div>
+        </center>
+        <div id="container-colors">
+            <div class="color-box" id="color-box-1"></div>
+            <div class="color-box" id="color-box-2"></div>
+            <div class="color-box" id="color-box-3"></div>
+            <div class="color-box" id="color-box-4"></div>
+            <div class="color-box" id="color-box-5"></div>
+            <div class="color-box" id="color-box-6"></div>
+            <div class="color-box" id="color-box-7"></div>
+            <div class="color-box" id="color-box-8"></div>
+            <div class="color-box" id="color-box-9"></div>
+            <div class="color-box" id="color-box-10"></div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <center>
+            <div id="api-container" class="api-container">
+                <div id="api-heading">
+                    <h1>API</h1>
+                    <p>Get the color palette in JSON format</p>
+                    <br>
+                    <br>
+                </div>
+                <div id="api-input">
+                    <h2>API Documentation</h2>
+                    <br>
+                    <br>
+                    <h3>Get a color palette of Four colors of same shade hue color using this endpoint: <a href="https://gautampatil.pythonanywhere.com/palette" target="_blank">https://gautampatil.pythonanywhere.com/palette</a> the response will be in a json format.</h3>
+                    <h3>Get API response in json format with required no of colors using this endpoint: <a href="https://gautampatil.pythonanywhere.com/palette/10" target="_blank">https://gautampatil.pythonanywhere.com/palette/[no_of_colors]</a></h3>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <div id="api-output">
+                    <p id="api-output-text"></p>
+                </div>
+            </div>
+        </center>
+
+    </div>
+    
+</body>
+<script>
+  
+let btn = document.getElementById("button");
+
+function randomH() {
+    return Math.floor(Math.random() * 360);
+}
+function randomS() {
+    return Math.floor(Math.random() * 101);
+}
+
+function rgb2hex(rgb) {
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    function hex(x) {
+        return ("0" + parseInt(x).toString(16)).slice(-2);
+    }
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
+function generateShades() {
+    let randomHue = randomH();
+    let randomSat = randomS();
+    let s = 110;
+    
+
+    
+    for (var i = 1; i < 5; i++) {
+        let el = document.getElementById("color-box-" + i);
+        el.style.display = 'block';
+        el.style.backgroundColor = "hsl(" + randomHue + ", " + randomSat + "%, " + (s= s - 20) + "%)";
+
+        el.addEventListener('mouseenter', e =>{
+            el.style.cursor = 'pointer';
+            el.innerText = rgb2hex(el.style.backgroundColor);
+            el.style.fontFamily = 'Poppins, sans-serif';
+            el.style.fontSize = '1.5rem';
+        })
+
+        el.addEventListener('mouseleave', e =>{
+            el.innerText = '';
+        })
+
+        el.addEventListener('click', e =>{
+            navigator.clipboard.writeText(rgb2hex(el.style.backgroundColor));
+
+        })
+
+    }
+
+}
+
+generateShades();
+
+btn.addEventListener("click", () => {
+    generateShades();
+});
+</script>
+</html>
