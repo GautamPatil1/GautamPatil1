@@ -7,7 +7,7 @@ I am currently a third-year Undergrad pursuing Computer Science from Pune Univer
 ## 📩Connect with me -
 
 [![Gmail Badge](https://img.shields.io/badge/-gautampatil@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gautam.patil4545@gmail.com)](mailto:gautam.patil4545@gmail.com)
-[![Linkedin Badge](https://img.shields.io/badge/-GautamPatil-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/kirti-lulle-aab51a23b/)](https://www.linkedin.com/in/gautampatil1/)
+[![Linkedin Badge](https://img.shields.io/badge/-GautamPatil-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/gautampatil1/)](https://www.linkedin.com/in/gautampatil1/)
 
 ## ⚡ Technologies
 
