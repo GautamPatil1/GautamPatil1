@@ -47,7 +47,9 @@ I am currently a third-year Undergrad pursuing Computer Science from Pune Univer
 
 ## 📈 Stats:
 <p>
-  <img width="54%" src="https://github-readme-stats.vercel.app/api?username=GautamPatil1&show_icons=true&theme=tokyonight" />
-  </br>
-  <img width="50%" src="https://github-readme-stats.vercel.app/api/top-langs?username=GautamPatil1&show_icons=true&theme=tokyonight&locale=en&layout=compact&langs_count=7" /> 
+  <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=GautamPatil1&show_icons=true&locale=en&layout=compact" alt="GautamPatil1" /></p>
+
+  <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=GautamPatil1&show_icons=true&locale=en" alt="GautamPatil1" /></p>
+
+  <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=GautamPatil1&" alt="GautamPatil1" /></p>
 </p>
