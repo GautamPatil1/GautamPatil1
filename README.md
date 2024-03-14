@@ -3,7 +3,7 @@
 I am Gautam Patil, an enthusiast working on some projects.
 
 I am currently a third-year Undergrad pursuing Computer Science from Pune University.
-
+![](https://komarev.com/ghpvc/?username=GautamPatil1&base=100)
 ## 📩Connect with me -
 
 [![Gmail Badge](https://img.shields.io/badge/-gautampatil@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gautam.patil4545@gmail.com)](mailto:gautam.patil4545@gmail.com)
