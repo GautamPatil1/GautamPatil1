@@ -2,7 +2,12 @@
 
 I am Gautam Patil, an enthusiast working on some projects.
 
-I am currently a third-year Undergrad pursuing Computer Science from Pune University.
+Aspiring DevOps Engineer with a passion for crafting scalable and performant software solutions. Strong background in
+Computer Science Engineering complemented by hands-on experience in developing CI/CD pipelines and deploying
+cloud-based applications. Proficient in technologies such as Django, React, and AWS, with a collaborative mindset and a
+commitment to continuous learning and improvement.
+
+I am pursuing a Bachelor's in Computer Science Engineering Third Year and am excited to learn more. Outside of work I enjoy 3d design, swimming, and reading. My favorite books are Lord of the Mysteries and Mother of Learning.
 
 ![](https://komarev.com/ghpvc/?username=GautamPatil1&base=100)
 ## 📩Connect with me -
