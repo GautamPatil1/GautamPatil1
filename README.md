@@ -2,7 +2,7 @@
 
 I am Gautam Patil, an enthusiast working on some projects.
 
-Aspiring DevOps Engineer with a passion for crafting scalable and performant software solutions. Strong background in
+Application Security/DevSecOps Engineer with a passion for crafting scalable and performant software solutions. Strong background in
 Computer Science Engineering complemented by hands-on experience in developing CI/CD pipelines and deploying
 cloud-based applications. Proficient in technologies such as Django, React, and AWS, with a collaborative mindset and a
 commitment to continuous learning and improvement.
